@@ -1,7 +1,7 @@
 {
   "name": "markdown-editor",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
+  "description": "A simple markdown editor",
   "main": "index.js",
   "scripts": {
     "start": "DEBUG=true electron .",
@@ -17,7 +17,7 @@
     }
   },
   "keywords": [],
-  "author": "",
+  "author": "Fuat Ulugay",
   "license": "ISC",
   "devDependencies": {
     "electron": "^9.0.4",
