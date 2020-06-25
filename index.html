@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, 
+      initial-scale=1.0">
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="script-src 'self' 'unsafe-inline';"
+    />
+    <title>Document</title>
+    <link rel="stylesheet" href="./node_modules/simplemde/dist/simplemde.min.css">
+    <script src="./node_modules/simplemde/dist/simplemde.min.js"></script>
+    <style>
+        html, body {
+            height: 100%;
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+        }
+
+        .CodeMirror {
+            flex: 1;
+        }
+    </style>
+</head>
+<body ondrop="dropHandler(event);">
+    <h1>Editor</h1>
+    <textarea id="editor"></textarea>
+
+    <script>
+      var editor = new SimpleMDE({ 
+        element: document.getElementById('editor'), 
+        autofocus: true,
+        autoDownloadFontAwesome: true,
+        autosave: {
+            enabled: true,
+            uniqueId: "MyUniqueID",
+            delay: 1000,
+        },
+        showIcons: ["code", "table"],
+      });
+
+      const { ipcRenderer } = require('electron');
+      ipcRenderer.on('editor-event', (event, arg) => {
+          console.log(arg);
+          event.sender.send('editor-reply', `Received ${arg}`);
+
+          if (arg === 'toggle-bold') {
+            editor.toggleBold();
+          };
+          if (arg === 'toggle-italic') {
+            editor.toggleItalic();
+          };
+          if (arg === 'save') {
+            console.log("got save message!");
+            event.sender.send('save', editor.value());
+          };
+      });
+      ipcRenderer.on('load', (event, content) => {
+        if (content) {
+          console.log("got load file!");
+          editor.value(content);
+        }
+      });
+
+      ipcRenderer.send('editor-reply', 'Page Loaded');
+    </script>
+    <script>
+      function dropHandler(event) {
+        event.preventDefault();
+        if (event.dataTransfer.items) {
+          if (event.dataTransfer.items[0].kind === 'file') {
+            var file = event.dataTransfer.items[0].getAsFile();
+            if (file.type === 'text/markdown') {
+              var reader = new FileReader();
+              reader.onload = e => {
+                console.log(e.target.result);
+                // editor.value(e.target.result);
+                // this one is for codemirror editor the above can be also used
+                editor.codemirror.setValue(e.target.result);
+              };
+              reader.readAsText(file);
+            }
+          }
+        }
+      }
+      </script>
+</body>
+</html>
