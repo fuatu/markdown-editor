@@ -1,4 +1,5 @@
 const { app, BrowserWindow, Menu } = require('electron');
+const { autoUpdater } = require('electron-updater');
 const menu = require('./menu');
 
 let window;
@@ -12,6 +13,7 @@ app.on('ready', () => {
       }
     });
     window.loadFile('index.html');
+    autoUpdater.checkForUpdatesAndNotify();
 });
 
 Menu.setApplicationMenu(menu);

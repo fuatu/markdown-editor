@@ -5,7 +5,16 @@
   "main": "index.js",
   "scripts": {
     "start": "DEBUG=true electron .",
-    "build:macos": "electron-builder --macos --dir"
+    "build:macos": "electron-builder --macos --dir",
+    "publish:github": "electron-builder --mac -p always"
+  },
+  "build": {
+    "appId": "org.hacktr.markdown-editor",
+    "publish": {
+      "provider": "github",
+      "owner": "fuatu",
+      "repo": "markdown-editor"
+    }
   },
   "keywords": [],
   "author": "",
@@ -15,6 +24,7 @@
     "electron-builder": "^22.7.0"
   },
   "dependencies": {
+    "electron-updater": "^4.3.1",
     "simplemde": "^1.11.2"
   }
 }
