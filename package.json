@@ -1,7 +1,7 @@
 {
   "name": "markdown-editor",
-  "version": "1.0.1",
-  "description": "A simple markdown editor",
+  "version": "1.0.0",
+  "description": "A simple markdown editor. v1.1.0",
   "main": "index.js",
   "scripts": {
     "start": "DEBUG=true electron .",
@@ -24,7 +24,13 @@
     "electron-builder": "^22.7.0"
   },
   "dependencies": {
+    "electron-log": "^4.2.2",
     "electron-updater": "^4.3.1",
     "simplemde": "^1.11.2"
+  },
+  "extendInfo": {
+    "NSAppTransportSecurity": {
+      "NSAllowsArbitraryLoads": true
+    }
   }
 }

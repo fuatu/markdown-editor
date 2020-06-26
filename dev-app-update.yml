@@ -1,0 +1,4 @@
+owner: fuatu
+repo: markdown-editor
+provider: github
+updaterCacheDirName: markdown-editor-updater

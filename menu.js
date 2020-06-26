@@ -5,9 +5,11 @@ const {
   ipcMain, 
   BrowserWindow,
   globalShortcut,
-  dialog 
+  dialog, 
 } = require('electron');
+const { autoUpdater } = require('electron-updater');
 const fs = require('fs');
+const log = require('electron-log');
 
 app.on('ready', () => {
   globalShortcut.register('CommandOrControl+S', () => {
@@ -90,6 +92,14 @@ const template = [
         click() {
           saveFile();
         }
+      },
+      {
+        label: 'Check Updates',
+        click() {
+          log.info("Checking for update by user trigger from menu")
+          autoUpdater.autoDownload=false;
+          autoUpdater.checkForUpdates();
+        }
       }
     ]
   },
@@ -156,3 +166,4 @@ if (process.env.DEBUG) {
 const menu = Menu.buildFromTemplate(template);
 
 module.exports = menu;
+
