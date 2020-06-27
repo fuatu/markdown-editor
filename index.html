@@ -8,7 +8,7 @@
       http-equiv="Content-Security-Policy"
       content="script-src 'self' 'unsafe-inline';"
     />
-    <title>Document</title>
+    <title>Simple Markdown Editor</title>
     <link rel="stylesheet" href="./node_modules/simplemde/dist/simplemde.min.css">
     <script src="./node_modules/simplemde/dist/simplemde.min.js"></script>
     <style>
@@ -33,6 +33,7 @@
         element: document.getElementById('editor'), 
         autofocus: true,
         autoDownloadFontAwesome: true,
+        spellChecker: false,
         autosave: {
             enabled: true,
             uniqueId: "MyUniqueID",
