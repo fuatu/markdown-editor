@@ -20,7 +20,7 @@
   "author": "Fuat Ulugay",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^9.0.4",
+    "electron": "^13.6.6",
     "electron-builder": "^22.7.0"
   },
   "dependencies": {
